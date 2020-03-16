@@ -1,6 +1,6 @@
 class EmployeesController < ApplicationController
   
-  include Knock::Authenticable
+  #include Knock::Authenticable
   before_action :set_employee, only: [:show, :update, :destroy]
 
   # GET /employees
@@ -18,6 +18,10 @@ class EmployeesController < ApplicationController
   # GET /employees/byuserid/1
   def byuserid
     render json: Employee.find_by_user_id(params[:user_id]), :includes => [:user_attributes]
+  end
+
+  def byusername
+    render json: Employee.joins(:user).find_by(users:{username: params[:username]}), :includes => [:user_attributes]
   end
 
   # POST /employees

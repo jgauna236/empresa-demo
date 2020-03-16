@@ -15,12 +15,22 @@ class WorkingDaysController < ApplicationController
   # GET /working_days/actives
   def actives
     render json: WorkingDay.where(working: true)
+  end
+
+  # GET /working_days/betweendates/
+  def betweendates
+    render json: WorkingDay.where("updated_at >= :from OR created_at <= :to",{from: params[:from], to: params[:to]})
   end  
 
   # GET /working_days/current/1
   def current
     render json: WorkingDay.where(employee_id: params[:employee_id]).order(created_at: :desc).first();
-  end  
+  end   
+  
+  # GET /working_days/byemployeeid/1
+  def byemployeeid
+    render json: WorkingDay.where(employee_id: params[:employee_id]).order(created_at: :desc);
+  end   
 
   # GET /working_days/1
   def show
