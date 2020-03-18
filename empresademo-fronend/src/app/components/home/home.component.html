@@ -1,0 +1,64 @@
+<div  class="card" style="align-items: center;" id="card" style="width: 400px; align-items: center; margin: 0 auto; margin-top: 25px;">
+	<div class="card-title">
+      <h1 *ngIf="isEmployee()">Bienvenido {{currentEmployee.user.name}}</h1> 
+      <h1 *ngIf="isEmployer()">Bienvenido {{currentEmployer.user.name}}</h1> 
+	</div>
+
+	<div class="card-body" >
+		<div class ="row" *ngIf="isEmployee()" style="align-items: center"> 
+			<button type="button" mat-button mat-raised-button color="primary" *ngIf="!checkedIn" (click)="checkIn()" >Check-In</button>
+			<button type="button" mat-button mat-raised-button *ngIf="checkedIn" (click)="checkOut()" >Check-Out</button>
+		</div>
+		<div class ="row"style="text-align: center;">
+			<span>{{time | date:'dd MMMM yyyy'}} {{time | date:'HH:mm:ss'}}</span>
+		</div>
+		<div *ngIf="checkedIn" class ="row">
+			<span><h4>Tiempo trabajado</h4></span>
+			<span><h4>{{hrWorked}} hs, {{minWorked}} min, {{secWorked}} seg</h4></span>
+		</div>
+	</div>
+</div>
+<div *ngIf="isEmployee()" class="card container" >
+	<table  style="text-align: center;" class="table table-sm">
+		<thead>
+			<tr>
+				<th scope="col">Fecha de Entrada</th>
+				<th scope="col">Fecha de Salida</th>
+			</tr>
+		</thead>
+		<tbody>
+				<tr *ngFor="let wDay of workingDays">
+					<td scope="col">{{wDay.created_at | date:'dd/MM/yy HH:mm'}}</td>
+					<td *ngIf="wDay.working" scope="col"> Aún no ha salido</td>
+					<td *ngIf="!wDay.working" scope="col">{{wDay.updated_at | date:'dd/MM/yy HH:mm'}}</td>
+				
+				</tr>
+		</tbody>
+	</table>
+</div>
+<div *ngIf="isEmployer()" class="container">
+	<input type="text" class="form-control" placeholder="Buscar por nombre de empleado"
+	[(ngModel)]="searchTerm">
+</div>
+<div class="container">
+		<div *ngFor="let employee of filteredEmployees">
+			<app-display-employee [employee]="employee" [searchTerm]="searchTerm">
+			</app-display-employee>
+		</div>
+</div>
+
+<!--2
+<div class="row">
+	<div *ngFor="let i of workingDays" class="card" style="width:250px; text-align: center; margin-top: 15px; margin-right: 15px;">
+		<img class="card-img-top" src="../../../assets/person.png" alt="Card image">
+		<div class="card-body">
+		  <h4 class="card-title">{{i.employee.user.name}} {{i.employee.user.lastname}}</h4>
+		  <p class="card-text">trabajando desde las {{i.created_at |date:'HH:mm:ss'}} </p>
+		  <a  (click)="viewEmployee(i.employee)" class="btn btn-primary">Detalle</a>
+		  <a  (click)="goEmployee(i.employee)" class="btn btn-primary">See Profile</a>
+		  <a  (click)="goEmployee(i.employee)" class="btn btn-danger">See Profile</a>
+		</div>
+	</div>
+</div>
+<div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+-->

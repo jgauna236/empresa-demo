@@ -1,0 +1,17 @@
+.spacer {
+    flex: 1 1 auto;
+  }
+
+
+.btn-light{
+  color: black;
+}  
+
+.btn-primary{
+  background-color: indigo;
+}
+
+
+
+
+@import url("bootstrap.min.css"); 

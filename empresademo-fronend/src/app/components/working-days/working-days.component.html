@@ -1,0 +1,19 @@
+<div  class="card container" style="text-align: center;" >
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Empleado</th>
+                <th scope="col">Fecha de Entrada</th>
+                <th scope="col">Fecha de Salida</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr *ngFor="let wDay of workingDays">
+                    <td scope="col">{{wDay.employee.user.name}} {{wDay.employee.user.lastname}}</td>
+                    <td scope="col">{{wDay.created_at | date:'dd/MM/yy HH:mm'}}</td>
+                    <td *ngIf="wDay.working" scope="col"scope="col">Aún no ha salido</td>
+                    <td *ngIf="!wDay.working" woscope="col"scope="col">{{wDay.updated_at | date:'dd/MM/yy HH:mm'}}</td>
+                </tr>
+        </tbody>
+    </table>
+</div>

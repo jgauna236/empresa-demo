@@ -1,0 +1,16 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<body>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <!--  <span>HOME</span> -->
+     <span *ngIf="loginService.isLoggedIn()"><a mat-button href="/home">HOME</a></span>
+     <span  class="spacer"></span>
+     <a *ngIf="isEmployer()" mat-button routerLink="/working-days">Asitencias</a>
+     <a *ngIf="isEmployer()" mat-button routerLink="/employee-register">Registrar Empleado</a>
+     <a *ngIf="!loginService.isLoggedIn()" mat-button routerLink="/register">Registrar Administrador</a>
+     <a *ngIf="!loginService.isLoggedIn()" type="button" class="btn  btn-light" routerLink="/login">Login</a>
+     <a  *ngIf="loginService.isLoggedIn()" type="button" class="btn  btn-light" (click)="logout()"> Logout </a>
+  </mat-toolbar-row>
+</mat-toolbar>
+<router-outlet></router-outlet>
+</body>

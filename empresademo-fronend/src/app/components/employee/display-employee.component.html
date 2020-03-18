@@ -1,0 +1,29 @@
+
+	<div  class="card col-xs-12 col-sm-6 col-md-4" >
+		<img class="card-img-top" style=" width: 100px" src="../../../assets/person.png" alt="Card image">
+		<div class="card-body">
+		  <h4 class="card-title"><b>Nombre: </b>{{employee.user.name}}</h4>
+		  <h4 class="card-title"><b>Apellido: </b>{{employee.user.lastname}}</h4>
+		  <h4 class="card-title"><b>Edad: </b>{{employee.age}}</h4>
+		  <a *ngIf= "showDetailButton" [routerLink]="['/employee-detail',employee.user.username]">Detalle</a>
+		</div>
+	</div>
+	<div *ngIf= "!showDetailButton" class="card container" style="text-align: center;" >
+		<table class="table table-sm">
+			<thead>
+				<tr>
+					<th scope="col">Fecha de Entrada</th>
+					<th scope="col">Fecha de Salida</th>
+				</tr>
+			</thead>
+			<tbody>
+					<tr *ngFor="let wDay of employeeWorkingDays">
+						<td scope="col">{{wDay.created_at | date:'dd/MM/yy HH:mm'}}</td>
+						<td scope="col">{{wDay.updated_at | date:'dd/MM/yy HH:mm'|| "Aún no ha salido"}}</td>
+					
+					</tr>
+			</tbody>
+		</table>
+	</div>
+
+
